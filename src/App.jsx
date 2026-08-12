@@ -7,6 +7,11 @@ import Signup from './components/auth/Signup';
 import Dashboard from './pages/dashboard/Dashboard';
 import IncomeSummary from './pages/dashboard/IncomeSummary';
 import ExpenseTracking from './pages/dashboard/ExpenseTracking';
+import ManageExpense from './pages/dashboard/ManageExpense';
+import CategoryBreakdown from './pages/dashboard/CategoryBreakdown';
+import ExpenseCharts from './pages/dashboard/ExpenseCharts';
+import TransactionHistory from './pages/dashboard/TransactionHistory';
+import Settings from './pages/dashboard/Settings';
 
 
 const EmptyView = ({ name }) => (
@@ -61,11 +66,11 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/summary" element={<IncomeSummary />} />
           <Route path="/expenses" element={<ExpenseTracking />} />
-          <Route path="/manage-expense" element={<EmptyView name="Manage Expense" />} />
-          <Route path="/categories" element={<EmptyView name="Categories" />} />
-          <Route path="/charts" element={<EmptyView name="Charts" />} />
-          <Route path="/transactions" element={<EmptyView name="Transactions" />} />
-          <Route path="/setting" element={<EmptyView name="Settings" />} />
+          <Route path="/manage-expense" element={<ManageExpense />} />
+          <Route path="/categories" element={<CategoryBreakdown />} />
+          <Route path="/charts" element={<ExpenseCharts />} />
+          <Route path="/transactions" element={<TransactionHistory />} />
+          <Route path="/settings" element={<Settings />} />
 
         </Route>
 

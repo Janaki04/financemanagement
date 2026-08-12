@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Category Breakdown', icon: PieChart, path: '/categories' },
     { name: 'Expense Charts', icon: BarChart3, path: '/charts' },
     { name: 'Transaction History', icon: History, path: '/transactions' },
-    { name: 'Settings', icon: Settings, path: '/setting' },
+    { name: 'Settings', icon: Settings, path: '/settings' },
   ];
 
   const activeClass = 
