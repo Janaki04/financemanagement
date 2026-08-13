@@ -3,7 +3,7 @@ import { Eye, EyeOff, Lock, Mail, ArrowRight, ShieldCheck, Wallet } from 'lucide
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-export default function FinanceLogin() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -24,11 +24,31 @@ export default function FinanceLogin() {
     setIsLoading(true);
 
     setTimeout(() => {
-    sessionStorage.setItem('userSession', JSON.stringify({ email, isLoggedIn: true })); 
-  toast.success('Authentication successful!');
-  setIsLoading(false);
-  navigate('/dashboard', { replace: true });
+      sessionStorage.setItem('userSession', JSON.stringify({ 
+        email, 
+        isLoggedIn: true,
+        cardSetupCompleted: false 
+      })); 
+
+      toast.success('Authentication successful! Proceeding to card setup...');
+      setIsLoading(false);
+
+      navigate('/add-card', { replace: true });
     }, 1200);
+  };
+
+  const handleGoogleSignIn = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      sessionStorage.setItem('userSession', JSON.stringify({ 
+        email: 'google.user@finance.io', 
+        isLoggedIn: true,
+        cardSetupCompleted: false 
+      }));
+      toast.success('Google Authentication successful!');
+      setIsLoading(false);
+      navigate('/add-card', { replace: true });
+    }, 1000);
   };
 
   return (
@@ -108,8 +128,8 @@ export default function FinanceLogin() {
 
                 <button 
                   type="button"
-                  onClick={() => toast.success("Google SSO initiated.")}
-                  className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#0B2E33]/60 border border-[#93B1B5]/40 rounded-xl hover:bg-[#4F7C82]/30 active:scale-[0.99] transition-all duration-200 text-xs font-semibold text-[#B8E3E9] shadow-sm hover:border-[#B8E3E9]/60 group"
+                  onClick={handleGoogleSignIn}
+                  className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#0B2E33]/60 border border-[#93B1B5]/40 rounded-xl hover:bg-[#4F7C82]/30 active:scale-[0.99] transition-all duration-200 text-xs font-semibold text-[#B8E3E9] shadow-sm hover:border-[#B8E3E9]/60 group cursor-pointer"
                 >
                   <svg className="w-4 h-4 transition-transform group-hover:scale-110 duration-200" viewBox="0 0 24 24">
                     <path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.93 5.93 0 0 1 8 12.583a5.93 5.93 0 0 1 5.99-5.935c1.45 0 2.76.51 3.8 1.35l3.17-3.17C18.99 2.85 16.25 1.5 13.99 1.5a10.5 10.5 0 0 0-10.5 10.5 10.5 10.5 0 0 0 10.5 10.5c5.73 0 10.14-4.04 10.14-10.21 0-.48-.04-.84-.13-1.21H12.24Z"/>
@@ -186,8 +206,8 @@ export default function FinanceLogin() {
                     
                     <button 
                       type="button" 
-                      onClick={() => toast.info("Password reset request sent.")}
-                      className="text-xs text-[#B8E3E9] hover:text-white transition-colors font-semibold hover:underline"
+                      onClick={() => toast.info("Password reset link sent to your registered email.")}
+                      className="text-xs text-[#B8E3E9] hover:text-white transition-colors font-semibold hover:underline cursor-pointer"
                     >
                       Forgot password?
                     </button>
@@ -197,13 +217,13 @@ export default function FinanceLogin() {
                     <button 
                       type="submit"
                       disabled={isLoading}
-                      className="w-full bg-gradient-to-r from-[#4F7C82] to-[#B8E3E9] hover:from-[#B8E3E9] hover:to-[#4F7C82] text-[#0B2E33] font-bold text-xs py-3 rounded-xl transition-all duration-300 shadow-md shadow-[#4F7C82]/20 hover:shadow-lg hover:shadow-[#B8E3E9]/20 active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="w-full bg-gradient-to-r from-[#4F7C82] to-[#B8E3E9] hover:from-[#B8E3E9] hover:to-[#4F7C82] text-[#0B2E33] font-bold text-xs py-3 rounded-xl transition-all duration-300 shadow-md shadow-[#4F7C82]/20 hover:shadow-lg hover:shadow-[#B8E3E9]/20 active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
                     >
                       {isLoading ? (
                         <div className="w-4 h-4 border-2 border-[#0B2E33]/30 border-t-[#0B2E33] rounded-full animate-spin" />
                       ) : (
                         <>
-                          <span>Secure Sign In</span>
+                          <span>Sign In & Continue</span>
                           <ArrowRight size={15} className="transition-transform group-hover:translate-x-1 duration-200 stroke-[2.5]" />
                         </>
                       )}
@@ -218,7 +238,7 @@ export default function FinanceLogin() {
                 <button 
                   type="button"
                   onClick={() => navigate("/signup")} 
-                  className="text-[#B8E3E9] font-semibold hover:text-white hover:underline transition-all inline-block ml-0.5"
+                  className="text-[#B8E3E9] font-semibold hover:text-white hover:underline transition-all inline-block ml-0.5 cursor-pointer"
                 >
                   Create an account
                 </button>

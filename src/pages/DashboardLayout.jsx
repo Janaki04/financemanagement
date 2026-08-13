@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }) => {
       <div className={" flex flex-col flex-1 min-w-0 h-screen transition-all duration-300 ease-in-out lg:pl-[260px]"}>
         <Header onMenuClick={() => setIsSidebarOpen(true)} />
         <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#EBF6F8]">
-          <div className="p-4 sm:p-6 lg:pt-2 lg:p-8 max-w-[1600px] mx-auto w-full">
+          <div className="p-4 sm:p-6 lg:pt-6 lg:p-8 max-w-[1600px] mx-auto w-full">
             {children}
           </div>
         </main>

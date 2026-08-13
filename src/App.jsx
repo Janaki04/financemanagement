@@ -12,6 +12,7 @@ import CategoryBreakdown from './pages/dashboard/CategoryBreakdown';
 import ExpenseCharts from './pages/dashboard/ExpenseCharts';
 import TransactionHistory from './pages/dashboard/TransactionHistory';
 import Settings from './pages/dashboard/Settings';
+import AddCard from './components/AddCard';
 
 
 const EmptyView = ({ name }) => (
@@ -71,6 +72,8 @@ function App() {
           <Route path="/charts" element={<ExpenseCharts />} />
           <Route path="/transactions" element={<TransactionHistory />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/add-card" element={<AddCard />} />
+
 
         </Route>
 
